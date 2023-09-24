@@ -19,7 +19,7 @@ export class GitPipelineStack extends cdk.Stack {
           phase: {
             install : {
               'runtime-version': {
-                nodejs: "nodejs: 18"
+                nodejs: 18
               }
             }
           }
