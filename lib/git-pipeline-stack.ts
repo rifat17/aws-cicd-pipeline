@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { LinuxBuildImage, BuildSpec } from 'aws-cdk-lib/aws-codebuild';
-import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
+import { CodeBuildStep, CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import { Construct } from 'constructs';
 import { PipelineStage } from './PipelineStage';
 
@@ -16,7 +16,7 @@ export class GitPipelineStack extends cdk.Stack {
         },
         partialBuildSpec: BuildSpec.fromObject({
           version: 0.2,
-          phase: {
+          phases: {
             install : {
               'runtime-version': {
                 nodejs: 18
@@ -39,6 +39,12 @@ export class GitPipelineStack extends cdk.Stack {
 
     const testStage = pipeline.addStage(new PipelineStage(this, "PipelineTestStage", {
       stageName: "test"
+    }))
+    testStage.addPre(new CodeBuildStep("unit-test", {
+      commands: [
+        "npm ci",
+        "npm run test"
+      ]
     }))
   }
 
