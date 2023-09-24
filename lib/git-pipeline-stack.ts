@@ -3,6 +3,7 @@ import { LinuxBuildImage, BuildSpec } from 'aws-cdk-lib/aws-codebuild';
 import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import { Construct } from 'constructs';
 import { PipelineStage } from './PipelineStage';
+import { Runtime } from 'aws-cdk-lib/aws-lambda';
 
 export class GitPipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -19,7 +20,7 @@ export class GitPipelineStack extends cdk.Stack {
           phase: {
             install : {
               'runtime-version': {
-                nodejs: "latest"
+                nodejs: Runtime.NODEJS_18_X
               }
             }
           }
