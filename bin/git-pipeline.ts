@@ -7,3 +7,5 @@ const app = new cdk.App();
 new GitPipelineStack(app, 'GitPipelineStack', {
 
 });
+
+app.synth()
