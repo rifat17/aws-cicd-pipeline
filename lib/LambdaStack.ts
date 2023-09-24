@@ -12,7 +12,7 @@ export class LambdaStack extends Stack {
         super(scope, id, props)
 
         new NodejsFunction(this, "hello-world", {
-            runtime: Runtime.NODEJS_18_X,
+            // runtime: Runtime.NODEJS_18_X,
             handler: "handler",
             entry: (join(__dirname, "..", "services", "hello.ts")),
             environment:{

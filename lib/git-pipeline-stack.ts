@@ -13,14 +13,13 @@ export class GitPipelineStack extends cdk.Stack {
       codeBuildDefaults: {
         buildEnvironment: {
           buildImage: LinuxBuildImage.AMAZON_LINUX_2_5,
-          privileged: true
         },
         partialBuildSpec: BuildSpec.fromObject({
           version: 0.2,
           phase: {
             install : {
               'runtime-version': {
-                nodejs: 18
+                nodejs: "latest"
               }
             }
           }
